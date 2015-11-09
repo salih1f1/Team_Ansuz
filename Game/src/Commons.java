@@ -1,5 +1,3 @@
-package com.zetcode;
-
 public interface Commons {
     
     public static final int WIDTH = 300;
