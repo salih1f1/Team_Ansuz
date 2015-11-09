@@ -1,65 +1,63 @@
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-
 import javax.swing.*;
+import java.awt.event.KeyEvent;
 
-public class Paddle extends Sprite implements PolicyUtils.Commons {
-    public static void main(String[] args) {
-        private int dx;
+public class Paddle extends Sprite implements Commons {
 
-        public Paddle() {
+    private int dx;
 
-            ImageIcon ii = new ImageIcon("paddle.png");
-            image = ii.getImage();
+    public Paddle() {
 
-            i_width = image.getWidth(null);
-            i_heigth = image.getHeight(null);
+        ImageIcon ii = new ImageIcon("paddle.png");
+        image = ii.getImage();
 
-            resetState();
+        i_width = image.getWidth(null);
+        i_heigth = image.getHeight(null);
+
+        resetState();
+    }
+
+    public void move() {
+
+        x += dx;
+
+        if (x <= 0) {
+            x = 0;
         }
 
-        public void move() {
+        if (x >= WIDTH - i_width) {
+            x = WIDTH - i_width;
+        }
+    }
 
-            x += dx;
+    public void keyPressed(KeyEvent e) {
 
-            if (x <= 0) {
-                x = 0;
-            }
+        int key = e.getKeyCode();
 
-            if (x >= WIDTH - i_width) {
-                x = WIDTH - i_width;
-            }
+        if (key == KeyEvent.VK_LEFT) {
+            dx = -1;
         }
 
-        public void keyPressed(KeyEvent e) {
+        if (key == KeyEvent.VK_RIGHT) {
+            dx = 1;
+        }
+    }
 
-            int key = e.getKeyCode();
+    public void keyReleased(KeyEvent e) {
 
-            if (key == KeyEvent.VK_LEFT) {
-                dx = -1;
-            }
+        int key = e.getKeyCode();
 
-            if (key == KeyEvent.VK_RIGHT) {
-                dx = 1;
-            }
+        if (key == KeyEvent.VK_LEFT) {
+            dx = 0;
         }
 
-        public void keyReleased(KeyEvent e) {
-
-            int key = e.getKeyCode();
-
-            if (key == KeyEvent.VK_LEFT) {
-                dx = 0;
-            }
-
-            if (key == KeyEvent.VK_RIGHT) {
-                dx = 0;
-            }
+        if (key == KeyEvent.VK_RIGHT) {
+            dx = 0;
         }
+    }
 
-        private void resetState() {
+    private void resetState() {
 
-            x = INIT_PADDLE_X;
-            y = INIT_PADDLE_Y;
-        }
+        x = INIT_PADDLE_X;
+        y = INIT_PADDLE_Y;
     }
 }
