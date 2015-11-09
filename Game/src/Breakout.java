@@ -1,3 +1,5 @@
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
 import javax.swing.*;
 import java.awt.EventQueue;
 
@@ -11,7 +13,7 @@ public class Breakout extends JFrame {
         setTitle("Breakout");
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(Commons.WIDTH, Commons.HEIGTH);
+        setSize(PolicyUtils.Commons.WIDTH, Commons.HEIGTH);
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);

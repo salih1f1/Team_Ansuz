@@ -1,4 +1,8 @@
-public class Paddle extends Sprite implements Commons {
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
+import javax.swing.*;
+
+public class Paddle extends Sprite implements PolicyUtils.Commons {
     public static void main(String[] args) {
         private int dx;
 
