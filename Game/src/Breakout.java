@@ -25,6 +25,7 @@ public class Breakout extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+                System.out.println(1);
                 Breakout game = new Breakout();
                 game.setVisible(true);
             }
