@@ -1,4 +1,4 @@
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 public class Brick extends Sprite {
 
@@ -19,7 +19,7 @@ public class Brick extends Sprite {
     }
 
     public boolean isDestroyed() {
-
+        Board.pointsAdd();
         return destroyed;
     }
 
