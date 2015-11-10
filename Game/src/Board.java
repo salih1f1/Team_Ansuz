@@ -131,6 +131,7 @@ public class Board extends JPanel implements Commons {
 
         ingame = false;
         timer.cancel();
+        ResultsShow show = new ResultsShow();
     }
 
     private void checkCollision() {

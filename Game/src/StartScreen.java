@@ -63,8 +63,15 @@ public class StartScreen extends JFrame {
                     public void run() {
                         Breakout game = new Breakout();
                         game.setVisible(true);
+                        startScreenFrame.setVisible(false);
                     }
                 });
+            }
+        });
+        quitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
             }
         });
     }
