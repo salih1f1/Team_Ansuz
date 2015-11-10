@@ -1,11 +1,12 @@
 import javax.swing.*;
 import java.io.*;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public class ResultsShow extends JPanel{
-    private HashMap<String, Integer> results = new HashMap<>();
-    private HashMap<String, Integer> printResults = new HashMap<>();
+    private static TreeMap<String, Integer> results = new TreeMap<>();
     private JLabel renderer = new JLabel("555");
     private CellRendererPane crp = new CellRendererPane();
 
@@ -26,11 +27,17 @@ public class ResultsShow extends JPanel{
             }
         }catch (IOException ex){
         }
-        System.out.println();
-        results.entrySet().stream().sorted((x, y) -> x.getValue().compareTo(y.getValue()));
+
+        results.put(name, Board.pointShow());
+
+        Map<String, Integer> sortedMap =
+                results.entrySet().stream()
+                        .sorted(Map.Entry.comparingByValue())
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                                (e1, e2) -> e1, LinkedHashMap::new));
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Game/Files/results.txt"))) {
-            for(Map.Entry<String, Integer> entry : results.entrySet()) {
+            for(Map.Entry<String, Integer> entry : sortedMap.entrySet()) {
                 String key = entry.getKey();
                 Integer value = entry.getValue();
                 writer.write(key + " " + value);
@@ -50,6 +57,14 @@ public class ResultsShow extends JPanel{
         resultWin.setBounds(0,0,200,400);
 
         JLabel text = new JLabel();
+        int x = 0;
+        int y = 0;
+        for(Map.Entry<String, Integer> entry : results.entrySet()) {
+            String key = entry.getKey();
+            Integer value = entry.getValue();
+            text.setText(key + " " + value);
+            panel.add(text);
+        }
 
 
     }

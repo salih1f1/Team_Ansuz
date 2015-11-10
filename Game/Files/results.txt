@@ -1,5 +1,11 @@
-ko 8
-ho 7
 i 1
-ijn 45
+cho 2
 oimm 4
+ho 7
+ko 8
+chocho 15
+huuuuu 15
+huy 15
+j 15
+jo 15
+ijn 45
