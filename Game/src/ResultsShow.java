@@ -1,13 +1,11 @@
 import javax.swing.*;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.*;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 public class ResultsShow extends JPanel{
-    private HashMap<String, List<Integer>> results = new HashMap<>();
+    private HashMap<String, Integer> results = new HashMap<>();
+    private HashMap<String, Integer> printResults = new HashMap<>();
     private JLabel renderer = new JLabel("555");
     private CellRendererPane crp = new CellRendererPane();
 
@@ -17,22 +15,28 @@ public class ResultsShow extends JPanel{
     }
     public void collectResults(){
         String name= JOptionPane.showInputDialog("You have " + Board.pointShow() + " points. \n Please insert your name: ");
-        if (results.containsKey(name)) {
-            List<Integer> list = results.get(name);
-            list.add(Board.pointShow());
-            results.put(name, list);
-        }else {
-            ArrayList<Integer> resultList = new ArrayList<>();
-            resultList.add(Board.pointShow());
-            results.put(name, resultList);
+        try(BufferedReader fileReader = new BufferedReader(new FileReader("Game/Files/results.txt"))){
+            while (true){
+                String line = fileReader.readLine();
+                if (line == null) {
+                    break;
+                }
+                String[] words = line.split(" ");
+                results.put(words[0], Integer.parseInt(words[1]));
+            }
+        }catch (IOException ex){
         }
+        System.out.println();
+        results.entrySet().stream().sorted((x, y) -> x.getValue().compareTo(y.getValue()));
 
-        try(BufferedWriter writer = new BufferedWriter( new FileWriter("Game/Files/results.txt")))
-        {
-            writer.write(name + " " + Board.pointShow());
-        }
-        catch ( IOException e)
-        {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Game/Files/results.txt"))) {
+            for(Map.Entry<String, Integer> entry : results.entrySet()) {
+                String key = entry.getKey();
+                Integer value = entry.getValue();
+                writer.write(key + " " + value);
+                writer.newLine();
+            }
+        }catch (IOException ex){
         }
 
     }

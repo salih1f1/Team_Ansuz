@@ -1,1 +1,5 @@
-ho 15
+ko 8
+ho 7
+i 1
+ijn 45
+oimm 4
