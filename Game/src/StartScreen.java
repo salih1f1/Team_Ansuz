@@ -74,5 +74,11 @@ public class StartScreen extends JFrame {
                 System.exit(0);
             }
         });
+        resultsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ResultsShow.showResults();
+            }
+        });
     }
 }

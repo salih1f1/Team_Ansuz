@@ -19,6 +19,9 @@ public class Board extends JPanel implements Commons {
         points = points + 5;
         System.out.println(points);
     }
+    static int pointShow(){
+        return points;
+    }
     public Board() {
         initBoard();
     }
@@ -136,6 +139,7 @@ public class Board extends JPanel implements Commons {
         ingame = false;
         timer.cancel();
         ResultsShow show = new ResultsShow();
+
     }
 
     private void checkCollision() {
