@@ -17,6 +17,7 @@ public class Board extends JPanel implements Commons {
 
     static void pointsAdd(){
         points = points + 5;
+        System.out.println(points);
     }
     public Board() {
         initBoard();
@@ -83,9 +84,6 @@ public class Board extends JPanel implements Commons {
         g2d.drawImage(paddle.getImage(), paddle.getX(), paddle.getY(),
                 paddle.getWidth(), paddle.getHeight(), this);
 
-
-        Graphics2D showResult = null;
-        //showResult.drawString("5", 5, 5);
 
         for (int i = 0; i < N_OF_BRICKS; i++) {
             if (!bricks[i].isDestroyed()) {

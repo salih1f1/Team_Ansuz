@@ -19,12 +19,11 @@ public class Brick extends Sprite {
     }
 
     public boolean isDestroyed() {
-        Board.pointsAdd();
         return destroyed;
     }
 
     public void setDestroyed(boolean val) {
-
+        Board.pointsAdd();
         destroyed = val;
     }
 }
