@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -51,7 +52,14 @@ public class Board extends JPanel implements Commons {
         int k = 0;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 6; j++) {
-                bricks[k] = new Brick(j * 40 + 30, i * 10 + 50);
+
+                Random r = new Random();
+                int Low = 0;
+                int High = 1000;
+                int R = r.nextInt(High - Low)+Low;
+
+                bricks[k] = new Brick(j * 70+60, i * 30+20, R % 6);
+
                 k++;
             }
         }

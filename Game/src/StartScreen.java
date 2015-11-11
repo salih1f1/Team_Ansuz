@@ -1,3 +1,5 @@
+import javazoom.jl.player.Player;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
