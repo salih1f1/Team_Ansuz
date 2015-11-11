@@ -5,55 +5,49 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
+
 public class StartScreen extends JFrame {
+
+    private BufferedImage img;
+    private ImageIcon icon;
+    private JButton startButton = new JButton("Start Game");
+    private JButton quitButton = new JButton("Exit");
+
     public StartScreen(){
         startScreen();
     }
-    private void startScreen(){
-        JFrame startScreenFrame = new JFrame("Hello");
-        JPanel panel = new JPanel(new GridLayout(1,1));
-        startScreenFrame.setResizable(false);
-        startScreenFrame.setVisible(true);
 
-        System.out.println(startScreenFrame.getSize());
-        startScreenFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    private void startScreen(){
+        String musicPath = "Game/Files/music.mp3";
+        setTitle("Game");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        setVisible(true);
+
 
         try {
-            BufferedImage img = ImageIO.read(new File("Game/Files/Logo.jpg"));
-            ImageIcon icon = new ImageIcon(img);
-            JLabel label = new JLabel(icon);
-            label.setIcon(icon);
-            add(label);
-            label.setLayout(new FlowLayout());
+            img = ImageIO.read(new File("Game/Files/Logo.jpg"));
+            icon = new ImageIcon(img);
+
         }catch (IOException ex){
-            System.out.println(ex);
         }
 
-        JButton startButton = new JButton("Start");
-        JButton quitButton = new JButton("Exit");
-        JButton resultsButton = new JButton("Results");
+        setLayout(new BorderLayout());
+        JLabel background = new JLabel(icon);
+        add(background);
+        startButton.setFont(new Font("Arial",Font.PLAIN, 40));
+        quitButton.setFont(new Font("Arial", Font.PLAIN, 40));
+        background.setLayout(new FlowLayout());
+        background.add(startButton);
+        background.add(quitButton);
 
-        startButton.setOpaque(false);
-        startButton.setContentAreaFilled(false);
-        startButton.setBorderPainted(false);
+        setSize(800,500);
+        setResizable(false);
+        setLocationRelativeTo(null);
 
-        quitButton.setOpaque(false);
-        quitButton.setContentAreaFilled(false);
-        quitButton.setBorderPainted(false);
-
-        resultsButton.setOpaque(false);
-        resultsButton.setContentAreaFilled(false);
-        resultsButton.setBorderPainted(false);
-
-        panel.add(startButton);
-        panel.add(quitButton);
-        panel.add(resultsButton);
-        startScreenFrame.setContentPane(panel);
-
-        startScreenFrame.setBounds(350,150,800,500);
-        startScreenFrame.setVisible(true);
 
         startButton.addActionListener(new ActionListener() {
             @Override
@@ -63,7 +57,7 @@ public class StartScreen extends JFrame {
                     public void run() {
                         Breakout game = new Breakout();
                         game.setVisible(true);
-                        startScreenFrame.setVisible(false);
+                        setVisible(false);
                     }
                 });
             }
@@ -74,11 +68,15 @@ public class StartScreen extends JFrame {
                 System.exit(0);
             }
         });
-        resultsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ResultsShow.showResults();
-            }
-        });
+
+        try{
+
+            FileInputStream fis = new FileInputStream(musicPath);
+            Player playMP3 = new Player(fis);
+
+            playMP3.play();
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 }
