@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ResultsShow extends JPanel{
+public class ResultsShow extends JFrame{
     private static Map<String, Integer> results = new HashMap<String, Integer>() {};
     private static Map<String, Integer> sortedMap;
     private static JButton startButton = new JButton("Start new game");
@@ -52,18 +52,16 @@ public class ResultsShow extends JPanel{
         }
     }
     public static void showResults(){
+
         JFrame resultWin = new JFrame("Results");
         JPanel panel = new JPanel();
-
-        resultWin.getContentPane().add(panel);
         resultWin.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         resultWin.setResizable(true);
-        resultWin.setLocationRelativeTo(null);
 
-        resultWin.setVisible(true);
         StringBuilder builder = new StringBuilder();
         builder.append("<html>");
-        resultWin.setSize(300, 400);
+        builder.append("<br>");
+        builder.append("<br>");
 
         int i = 0;
         for(Map.Entry<String, Integer> entry : sortedMap.entrySet()) {
@@ -80,6 +78,7 @@ public class ResultsShow extends JPanel{
         panel.add(startButton);
         panel.add(quitButton);
         panel.add(label);
+        resultWin.getContentPane().add(panel);
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -87,7 +86,6 @@ public class ResultsShow extends JPanel{
                     @Override
                     public void run() {
                         Breakout game = new Breakout();
-                        game.setVisible(true);
                         resultWin.setVisible(false);
                     }
                 });
@@ -99,6 +97,9 @@ public class ResultsShow extends JPanel{
                 System.exit(0);
             }
         });
-
+        resultWin.setSize(250, 350);
+        resultWin.setResizable(false);
+        resultWin.setLocationRelativeTo(null);
+        resultWin.setVisible(true);
     }
 }

@@ -8,7 +8,7 @@ public class Brick extends Sprite {
 
         this.x = x;
         this.y = y;
-String imagePath = null;
+        String imagePath = null;
         switch (number){
             case 0 : imagePath = "Game/Files/brick0.png"; break;
             case 1 : imagePath = "Game/Files/brick1.png"; break;

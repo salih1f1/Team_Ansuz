@@ -26,17 +26,13 @@ public class StartScreen extends JFrame {
         String musicPath = "Game/Files/music.mp3";
         setTitle("Game");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
         setVisible(true);
-
-
         try {
             img = ImageIO.read(new File("Game/Files/Logo.jpg"));
             icon = new ImageIcon(img);
 
         }catch (IOException ex){
         }
-
         setLayout(new BorderLayout());
         JLabel background = new JLabel(icon);
         add(background);
@@ -45,12 +41,9 @@ public class StartScreen extends JFrame {
         background.setLayout(new FlowLayout());
         background.add(startButton);
         background.add(quitButton);
-
         setSize(800,500);
         setResizable(false);
         setLocationRelativeTo(null);
-
-
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -70,7 +63,6 @@ public class StartScreen extends JFrame {
                 System.exit(0);
             }
         });
-
         try{
 
             FileInputStream fis = new FileInputStream(musicPath);

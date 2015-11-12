@@ -16,13 +16,6 @@ public class Board extends JPanel implements Commons {
     private boolean ingame = true;
     private static int points = 0;
 
-    static void pointsAdd(){
-        points = points + 5;
-        System.out.println(points);
-    }
-    static int pointShow(){
-        return points;
-    }
     public Board() {
         initBoard();
     }
@@ -37,9 +30,17 @@ public class Board extends JPanel implements Commons {
         timer.scheduleAtFixedRate(new ScheduleTask(), DELAY, PERIOD);
     }
 
+    static void pointsAdd(){
+        points = points + 5;
+        System.out.println(points);
+    }
+
+    static int pointShow(){
+        return points;
+    }
+
     @Override
     public void addNotify() {
-
         super.addNotify();
         gameInit();
     }
